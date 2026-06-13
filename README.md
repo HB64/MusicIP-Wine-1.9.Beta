@@ -31,7 +31,7 @@ After that, you can edit either file on the host at any time — restart the con
 ```yaml
 services:
   musicip:
-    image: youruser/musicip-wine:latest
+    image: HB64/MusicIP-Wine-1.9.Beta:latest
     container_name: musicip
     restart: unless-stopped
     ports:
@@ -77,7 +77,7 @@ docker run -d \
   -v /path/to/config/mmm.ini:"/home/wineuser/.wine32/drive_c/Program Files/MusicIP/mmm.ini" \
   -v /path/to/config/recipes.xml:"/home/wineuser/.wine32/drive_c/Program Files/MusicIP/recipes.xml" \
   --restart unless-stopped \
-  youruser/musicip-wine:latest
+  HB64/MusicIP-Wine-1.9.Beta:latest
 ```
 
 The MusicIP API will be available at `http://localhost:10002`. Check it's up with:
