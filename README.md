@@ -18,8 +18,8 @@ This image requires `seccomp:unconfined`. Wine needs broader syscall access than
 
 ```bash
 mkdir -p /path/to/config
-wget -O /path/to/config/mmm.ini https://raw.githubusercontent.com/HB64/musicip-wine-1.9.b/main/mmm.ini
-wget -O /path/to/config/recipes.xml https://raw.githubusercontent.com/HB64/musicip-wine-1.9.b/main/recipes.xml
+wget -O /path/to/config/mmm.ini https://raw.githubusercontent.com/hb64/musicip-wine-1.9.b/main/mmm.ini
+wget -O /path/to/config/recipes.xml https://raw.githubusercontent.com/hb64/musicip-wine-1.9.b/main/recipes.xml
 ```
 
 After that, you can edit either file on the host at any time — restart the container for changes to take effect.
@@ -31,7 +31,7 @@ After that, you can edit either file on the host at any time — restart the con
 ```yaml
 services:
   musicip:
-    image: HB64/MusicIP-Wine-1.9.Beta:latest
+    image: hb64/musicip-wine-1.9.b:latest
     container_name: musicip
     restart: unless-stopped
     ports:
@@ -77,7 +77,7 @@ docker run -d \
   -v /path/to/config/mmm.ini:"/home/wineuser/.wine32/drive_c/Program Files/MusicIP/mmm.ini" \
   -v /path/to/config/recipes.xml:"/home/wineuser/.wine32/drive_c/Program Files/MusicIP/recipes.xml" \
   --restart unless-stopped \
-  HB64/MusicIP-Wine-1.9.Beta:latest
+  hb64/musicip-wine-1.9.b:latest
 ```
 
 The MusicIP API will be available at `http://localhost:10002`. Check it's up with:
