@@ -101,6 +101,7 @@ curl http://localhost:10002/api/version
 | `-v .../recipes.xml` | Mix generation recipes (user-editable) |
 | `--cap-add SYS_PTRACE` | Required by Wine |
 | `--security-opt seccomp=unconfined` | Required by Wine to run the legacy 32-bit binary |
+
 ## Troubleshooting
 
 **Permission errors on volumes** — Make sure `PUID`/`PGID` match the owner of the mounted directories on the host.
