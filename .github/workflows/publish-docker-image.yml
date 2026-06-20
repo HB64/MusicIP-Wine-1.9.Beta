@@ -42,15 +42,15 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-       - name: Push README to Docker Hub
-         uses: docker/build-push-action/update-container-description@v3b5e8027fcad23fda98b2e3ac259d8d67585f671
-         if: success()
-         with:
+      - name: Push README to Docker Hub
+        uses: christian-korneck/update-container-description-action@v1
+        if: success()
+        with:
           registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: hb1964/musicip-wine-1.9.b
-          readme: README.md   
+          readme: README.md
 
       - name: Generate artifact attestation
         uses: actions/attest@v4
