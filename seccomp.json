@@ -8,54 +8,6 @@
         "SCMP_ARCH_X86",
         "SCMP_ARCH_X32"
       ]
-    },
-    {
-      "architecture": "SCMP_ARCH_AARCH64",
-      "subArchitectures": [
-        "SCMP_ARCH_ARM"
-      ]
-    },
-    {
-      "architecture": "SCMP_ARCH_MIPS64",
-      "subArchitectures": [
-        "SCMP_ARCH_MIPS",
-        "SCMP_ARCH_MIPS64N32"
-      ]
-    },
-    {
-      "architecture": "SCMP_ARCH_MIPS64N32",
-      "subArchitectures": [
-        "SCMP_ARCH_MIPS",
-        "SCMP_ARCH_MIPS64"
-      ]
-    },
-    {
-      "architecture": "SCMP_ARCH_MIPSEL64",
-      "subArchitectures": [
-        "SCMP_ARCH_MIPSEL",
-        "SCMP_ARCH_MIPSEL64N32"
-      ]
-    },
-    {
-      "architecture": "SCMP_ARCH_MIPSEL64N32",
-      "subArchitectures": [
-        "SCMP_ARCH_MIPSEL",
-        "SCMP_ARCH_MIPSEL64"
-      ]
-    },
-    {
-      "architecture": "SCMP_ARCH_S390X",
-      "subArchitectures": [
-        "SCMP_ARCH_S390"
-      ]
-    },
-    {
-      "architecture": "SCMP_ARCH_RISCV64",
-      "subArchitectures": null
-    },
-    {
-      "architecture": "SCMP_ARCH_LOONGARCH64",
-      "subArchitectures": null
     }
   ],
   "syscalls": [
@@ -427,17 +379,6 @@
     },
     {
       "names": [
-        "process_vm_readv",
-        "process_vm_writev",
-        "ptrace"
-      ],
-      "action": "SCMP_ACT_ALLOW",
-      "includes": {
-        "minKernel": "4.8"
-      }
-    },
-    {
-      "names": [
         "socket"
       ],
       "action": "SCMP_ACT_ALLOW",
@@ -542,35 +483,6 @@
     },
     {
       "names": [
-        "sync_file_range2",
-        "swapcontext"
-      ],
-      "action": "SCMP_ACT_ALLOW",
-      "includes": {
-        "arches": [
-          "ppc64le"
-        ]
-      }
-    },
-    {
-      "names": [
-        "arm_fadvise64_64",
-        "arm_sync_file_range",
-        "sync_file_range2",
-        "breakpoint",
-        "cacheflush",
-        "set_tls"
-      ],
-      "action": "SCMP_ACT_ALLOW",
-      "includes": {
-        "arches": [
-          "arm",
-          "arm64"
-        ]
-      }
-    },
-    {
-      "names": [
         "arch_prctl"
       ],
       "action": "SCMP_ACT_ALLOW",
@@ -591,31 +503,6 @@
           "amd64",
           "x32",
           "x86"
-        ]
-      }
-    },
-    {
-      "names": [
-        "s390_pci_mmio_read",
-        "s390_pci_mmio_write",
-        "s390_runtime_instr"
-      ],
-      "action": "SCMP_ACT_ALLOW",
-      "includes": {
-        "arches": [
-          "s390",
-          "s390x"
-        ]
-      }
-    },
-    {
-      "names": [
-        "riscv_flush_icache"
-      ],
-      "action": "SCMP_ACT_ALLOW",
-      "includes": {
-        "arches": [
-          "riscv64"
         ]
       }
     },
@@ -685,31 +572,6 @@
         "arches": [
           "s390",
           "s390x"
-        ]
-      }
-    },
-    {
-      "names": [
-        "clone"
-      ],
-      "action": "SCMP_ACT_ALLOW",
-      "args": [
-        {
-          "index": 1,
-          "value": 2114060288,
-          "op": "SCMP_CMP_MASKED_EQ"
-        }
-      ],
-      "comment": "s390 parameter ordering for clone is different",
-      "includes": {
-        "arches": [
-          "s390",
-          "s390x"
-        ]
-      },
-      "excludes": {
-        "caps": [
-          "CAP_SYS_ADMIN"
         ]
       }
     },
@@ -870,17 +732,6 @@
           "CAP_PERFMON"
         ]
       }
-    },
-    {
-      "names": [
-        "modify_ldt",
-        "vm86",
-        "vm86old",
-        "personality",
-        "get_thread_area",
-        "set_thread_area"
-      ],
-      "action": "SCMP_ACT_ALLOW"
     }
   ]
 }

@@ -13,8 +13,29 @@ mkdir -p "/home/wineuser/.wine32/drive_c/Program Files/MusicIP"
 mkdir -p "/home/wineuser/.wine32/drive_c/users/wineuser/AppData/Roaming/MusicIP/"
 mkdir -p "/home/wineuser/.wine32/drive_c/users/root/AppData/Roaming/MusicIP/"
 
-# Copy MusicIP binaries (skip if already there)
+# Copy MusicIP binaries and default config from the image into the install
+# directory. -n (no-clobber) skips anything already there. This directory is
+# never bind-mounted as a whole, so mipcore.exe, MusicMagicServer.exe, the
+# dlls and the client.pem/root.pem certs always come fresh from the image and
+# are never host-writable.
 cp -rn /opt/MusicIP/. "/home/wineuser/.wine32/drive_c/Program Files/MusicIP/"
+
+# /config is the only persistent, user-editable location, holding just
+# mmm.ini, recipes.xml and moods/. Seed it from the image defaults on first
+# run, then symlink it into the install directory so MusicMagicServer reads
+# and writes the host copies directly - no sync step, so nothing it writes at
+# runtime can ever be lost on the next restart.
+mkdir -p /config/moods
+[ -f /config/mmm.ini ] || cp "/home/wineuser/.wine32/drive_c/Program Files/MusicIP/mmm.ini" /config/mmm.ini
+[ -f /config/recipes.xml ] || cp "/home/wineuser/.wine32/drive_c/Program Files/MusicIP/recipes.xml" /config/recipes.xml
+chown -R ${PUID}:${PGID} /config
+
+rm -f "/home/wineuser/.wine32/drive_c/Program Files/MusicIP/mmm.ini"
+rm -f "/home/wineuser/.wine32/drive_c/Program Files/MusicIP/recipes.xml"
+rm -rf "/home/wineuser/.wine32/drive_c/Program Files/MusicIP/moods"
+ln -s /config/mmm.ini "/home/wineuser/.wine32/drive_c/Program Files/MusicIP/mmm.ini"
+ln -s /config/recipes.xml "/home/wineuser/.wine32/drive_c/Program Files/MusicIP/recipes.xml"
+ln -s /config/moods "/home/wineuser/.wine32/drive_c/Program Files/MusicIP/moods"
 
 # Fix ownership of everything
 chown -R ${PUID}:${PGID} /home/wineuser
