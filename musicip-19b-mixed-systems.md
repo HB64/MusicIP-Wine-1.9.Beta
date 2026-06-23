@@ -137,7 +137,7 @@ MusicIP 1.8 is a native Linux binary. It communicates directly in Linux paths â
 
 ## Verification test (not yet run)
 
-To confirm definitively (optional, deliberately reintroduces the bug â€” revert immediately after):
+To confirm definitively (optional, deliberately reintroduces the bug --> revert immediately after):
 
 ```perl
 # Swap order to reproduce:
