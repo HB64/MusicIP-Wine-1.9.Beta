@@ -4,7 +4,7 @@
 
 ## Symptom
 
-LMS's native MusicIP `getMix()` (`Slim::Plugin::MusicMagic::Plugin`) would silently drop tracks from a mix. No crash, no visible error to the user — tracks simply never made it into the player queue. SugarCube's own Dynamic Shuffle Track Mixing pipeline was unaffected (see "Scope" below), but the native LMS MusicIP "Mix"/Mood Mix path was hit.
+LMS's native MusicIP MusicMagic Mood Mixer `getMix()` (`Slim::Plugin::MusicMagic::Plugin`) would silently drop tracks from a mix. No crash, no visible error to the user — tracks simply never made it into the player queue. SugarCube's own Dynamic Shuffle Track Mixing pipeline was unaffected (see "Scope" below), but the native LMS MusicIP "Mix"/Mood Mix path was hit.
 
 The only trace was a default-level (`ERROR`) log line:
 
@@ -45,7 +45,7 @@ Same ordering requirement applies to the equivalent block in `Importer.pm`'s `pr
 ## Scope — what this bug does and doesn't affect
 
 - **Affected:** LMS's native MusicIP integration — `Slim::Plugin::MusicMagic::Plugin::getMix()` (browse-by-mix, Mood Mix, instant mix) and the library scan/import path in `Importer.pm`. **Only relevant when running MusicIP 1.9.b under Wine.** When running MusicIP 1.8 (native Linux), both MusicIP and LMS use `/music/...` paths natively and no translation is needed — the patches are a no-op but do not cause harm.
-- **Not affected:** SugarCube's own Dynamic Shuffle Track Mixing (DSTM) queueing. SugarCube has its own independent path-translation logic, configured via its own plugin settings (`localmediapath`/`nasconvertpath`/"Dynamic" variants — visible in `Plugins::SugarCube::Plugin::buildMIPReq` log output), and does not route through the `Plugin.pm`/`Importer.pm` code above. SugarCube continuing to work while native MusicIP mixing silently failed is consistent with this separation, not contradictory.
+- **Not affected:** SugarCube's Auto Mix function (on Lyrion'interface or set as a sugarcube preset) queueing. SugarCube has its own independent path-translation (DPC: Dynamic Path Conversion) logic, configured via its own general plugin settings (`localmediapath`/`nasconvertpath`/"Dynamic" variants — visible in `Plugins::SugarCube::Plugin::buildMIPReq` log output), and does not route through the `Plugin.pm`/`Importer.pm` code above. SugarCube continuing to work while native MusicIP mixing silently failed is consistent with this separation, not contradictory.
 
 ## How this was found
 
